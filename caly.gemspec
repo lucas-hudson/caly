@@ -1,6 +1,10 @@
+$:.push File.expand_path("../lib", __FILE__)
+
+require "caly/version"
+
 Gem::Specification.new do |s|
   s.name        = "caly"
-  s.version     = "0.0.0"
+  s.version     = Caly::VERSION
   s.summary     = "Caly - One API, any Calendar"
   s.description = "Integrate easily with Google Calendar and Microsoft Outlook calendars."
   s.authors     = ["Lucas Hudson"]

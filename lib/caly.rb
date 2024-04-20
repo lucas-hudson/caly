@@ -1,6 +1,8 @@
 require "net/http"
 require "json"
 
+require "caly/version"
+
 require "caly/providers/base"
 require "caly/providers/google_oauth2"
 require "caly/providers/microsoft_graph"
