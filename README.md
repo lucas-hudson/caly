@@ -1,5 +1,7 @@
-# Caly
-Short description and motivation.
+# Caly - One API, any Calendar
+Caly unifies endpoints and object data models across many calendar APIs, helping you instantly integrate your app with 
+[Google Calendar](https://developers.google.com/calendar/api/guides/overview) and 
+[Microsoft Outlook](https://learn.microsoft.com/en-us/graph/api/resources/calendar?view=graph-rest-1.0) in one go.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -19,7 +21,11 @@ $ gem install caly
 ```
 
 ## Usage
-How to use my plugin.
+```ruby
+account = Caly::Account.new(provider, token)
+
+account.list_calendars #=> Array of Caly::Calendar instances
+```
 
 ## Contributing
 Contribution directions go here.
