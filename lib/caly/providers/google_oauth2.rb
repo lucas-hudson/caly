@@ -9,10 +9,12 @@ module Caly
       def list_calendars
         response = execute_request(:get, "users/me/calendarList")
 
-        return error_from(response) unless successful?(response[:code])
+        return error_from(response) unless response["code"] == "200"
 
-        response[:items].map do |c|
-          ::Caly::Calendar.new(id: c[:id], name: c[:summary], description: c[:description], location: c[:location], timezone: c[:timeZone], raw: c) if c[:accessRole] == "owner"
+        response["items"].map do |c|
+          if c["accessRole"] == "owner"
+            Caly::Calendar.new(id: c["id"], name: c["summary"], description: c["description"], location: c["location"], timezone: c["timeZone"], raw: c)
+          end
         end.compact
       end
     end

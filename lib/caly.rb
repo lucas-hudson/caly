@@ -11,6 +11,8 @@ require "caly/account"
 require "caly/calendar"
 require "caly/error"
 
+require "caly/util"
+
 module Caly
   AVAILABLE_PROVIDERS = [:google_oauth2, :microsoft_graph].freeze
 end

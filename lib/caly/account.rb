@@ -4,7 +4,7 @@ module Caly
 
     def initialize(provider, token)
       unless Caly::AVAILABLE_PROVIDERS.include?(provider.to_sym)
-        raise ArgumentError("#{provider} isn't a supported provider.")
+        raise ArgumentError.new("#{provider} isn't a supported provider.")
       end
 
       @provider = provider
@@ -12,7 +12,7 @@ module Caly
     end
 
     def self.caly_provider_for(name)
-      "Caly::Providers::#{name.to_s.classify}".constantize
+      Caly::Providers.const_get(name.to_s.split("_").collect!(&:capitalize).join)
     end
 
     def caly_provider

@@ -9,10 +9,10 @@ module Caly
       def list_calendars
         response = execute_request(:get, "calendars")
 
-        return error_from(response) unless successful?(response[:code])
+        return error_from(response) unless response["code"] == "200"
 
-        response[:value].map do |c|
-          ::Caly::Calendar.new(id: c[:id], name: c[:name], raw: c) if c[:canEdit] == true
+        response[:"value"].map do |c|
+          Caly::Calendar.new(id: c["id"], name: c["name"], raw: c) if c["canEdit"] == true
         end.compact
       end
     end

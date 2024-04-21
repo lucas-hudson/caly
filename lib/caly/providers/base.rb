@@ -22,15 +22,11 @@ module Caly
           http.request(request)
         end
 
-        JSON.parse(response.body).merge(code: response.code).with_indifferent_access
+        JSON.parse(response.body).merge("code" => response.code)
       end
 
       def error_from(response)
-        ::Caly::Error.new(message: response.dig(:error, :message), code: response.dig(:code))
-      end
-
-      def successful?(code)
-        Rack::Utils::HTTP_STATUS_CODES[code.to_i] == "OK"
+        ::Caly::Error.new(message: response.dig("error", "message"), code: response.dig("code"))
       end
     end
   end
