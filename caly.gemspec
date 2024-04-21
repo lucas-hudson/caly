@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.description = "Integrate easily with Google Calendar and Microsoft Outlook calendars."
   s.authors = ["Lucas Hudson"]
   s.email = "lucashudson.contact@gmail.com"
-  s.homepage = "https://rubygems.org/gems/caly"
+  s.homepage = "https://github.com/lucas-hudson/caly"
   s.license = "MIT"
   s.files = Dir[
     "lib/**/*",
