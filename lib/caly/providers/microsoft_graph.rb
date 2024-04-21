@@ -11,7 +11,7 @@ module Caly
 
         return error_from(response) unless response["code"] == "200"
 
-        response[:"value"].map do |c|
+        response["value"].map do |c|
           Caly::Calendar.new(id: c["id"], name: c["name"], raw: c) if c["canEdit"] == true
         end.compact
       end

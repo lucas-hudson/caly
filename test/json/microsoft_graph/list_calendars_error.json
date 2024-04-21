@@ -1,0 +1,13 @@
+{
+  "error":
+  {
+    "code":"InvalidAuthenticationToken",
+    "message":"Request had invalid authentication credentials.",
+    "innerError":
+    {
+      "date":"2024-04-11T09:56:23",
+      "request-id":"b393b6ba-5044-4d75-8b6b-bd6fc41d1bfd",
+      "client-request-id":"b393b6ba-5044-4d75-8b6b-bd6fc41d1bfd"
+    }
+  }
+}

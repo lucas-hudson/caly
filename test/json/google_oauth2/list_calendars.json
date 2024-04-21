@@ -1,0 +1,69 @@
+{
+  "kind": "calendar#calendarList",
+  "etag": "\"p330b5tfdsfnpf4oa0o\"",
+  "nextSyncToken": "CMCy9ffLyYUDEfsdhRsLmh1ZHNvbkB3ZS1saW5rLmNvbQ==",
+  "items": [
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1632490188832519000\"",
+      "id": "google_oauth2_id",
+      "summary": "google_oauth2_name",
+      "description": "Displays birthdays, anniversaries, and other event dates of people in Google Contacts.",
+      "timeZone": "Europe/Paris",
+      "colorId": "13",
+      "backgroundColor": "#92e1c0",
+      "foregroundColor": "#000000",
+      "accessRole": "reader",
+      "defaultReminders": [],
+      "conferenceProperties": {
+        "allowedConferenceSolutionTypes": [
+          "hangoutsMeet"
+        ]
+      }
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"16857120789490180000\"",
+      "id": "google_oauth2_id",
+      "summary": "google_oauth2_name",
+      "timeZone": "Europe/Paris",
+      "colorId": "15",
+      "backgroundColor": "#9fc6e7",
+      "foregroundColor": "#000000",
+      "selected": true,
+      "accessRole": "owner",
+      "defaultReminders": [
+        {
+          "method": "popup",
+          "minutes": 10
+        }
+      ],
+      "notificationSettings": {
+        "notifications": [
+          {
+            "type": "eventCreation",
+            "method": "email"
+          },
+          {
+            "type": "eventChange",
+            "method": "email"
+          },
+          {
+            "type": "eventCancellation",
+            "method": "email"
+          },
+          {
+            "type": "eventResponse",
+            "method": "email"
+          }
+        ]
+      },
+      "primary": true,
+      "conferenceProperties": {
+        "allowedConferenceSolutionTypes": [
+          "hangoutsMeet"
+        ]
+      }
+    }
+  ]
+}
