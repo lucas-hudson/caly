@@ -8,4 +8,5 @@ group :development do
   gem "webmock"
   gem "standard"
   gem "simplecov", require: false
+  gem "simplecov-shields-badge", require: false
 end

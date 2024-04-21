@@ -2,6 +2,9 @@ require "simplecov"
 
 SimpleCov.start { add_filter "/test/" }
 
+require "shields_badge"
+SimpleCov.formatter = SimpleCov::Formatter::ShieldsBadge
+
 require "minitest/autorun"
 require "webmock/minitest"
 require "caly"
