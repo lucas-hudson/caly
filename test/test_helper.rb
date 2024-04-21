@@ -6,7 +6,7 @@ require "pry"
 class Minitest::Spec
   def self.it_lists_calendars(provider, path, &block)
     it "must return an array of Calendar instances" do
-      json = File.open("test/json/#{provider}/list_calendars.json").read
+      json = File.read("test/json/#{provider}/list_calendars.json")
       stub_request(:get, "#{@url}/#{path}").to_return_json(body: json, status: 200)
 
       response = instance_exec(&block)
@@ -20,7 +20,7 @@ class Minitest::Spec
 
   def self.it_returns_an_error(provider, path, &block)
     it "must return an Error instance" do
-      json = File.open("test/json/#{provider}/list_calendars_error.json").read
+      json = File.read("test/json/#{provider}/list_calendars_error.json")
       stub_request(:any, /.*/).to_return_json(body: json, status: 401)
 
       response = instance_exec(&block)

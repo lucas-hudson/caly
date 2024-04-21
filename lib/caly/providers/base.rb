@@ -6,7 +6,7 @@ module Caly
       def_delegator :@client, :execute_request
 
       def initialize(token)
-        @headers = {"Authorization": "Bearer #{token}", "ContentType": "application/json"}
+        @headers = {Authorization: "Bearer #{token}", ContentType: "application/json"}
         @client = Caly::Client.new(@url, @headers)
       end
 
