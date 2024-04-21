@@ -12,7 +12,7 @@ module Caly
     end
 
     def self.caly_provider_for(name)
-      Caly::Providers.const_get(name.to_s.split("_").collect!(&:capitalize).join)
+      Caly::Providers.const_get(Util.classify(name))
     end
 
     def caly_provider
