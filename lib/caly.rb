@@ -1,5 +1,6 @@
 require "net/http"
 require "json"
+require "forwardable"
 
 require "caly/version"
 
@@ -9,6 +10,7 @@ require "caly/providers/microsoft_graph"
 
 require "caly/account"
 require "caly/calendar"
+require "caly/client"
 require "caly/error"
 
 require "caly/util"
