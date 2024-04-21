@@ -31,7 +31,16 @@ account.list_calendars #=> Array of Caly::Calendar instances
 ```
 
 ## Contributing
-Contribution directions go here.
+First of all, **thank you** for wanting to help and reading this!
+
+If you have an issue you'd like to submit, please do so using the issue tracker in GitHub. Please be as detailed as you can.
+
+If you'd like to open a PR please make sure the following things pass:
+
+```ruby
+rake test
+standardrb
+```
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
