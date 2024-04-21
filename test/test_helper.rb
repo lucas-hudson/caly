@@ -1,3 +1,7 @@
+require "simplecov"
+
+SimpleCov.start { add_filter "/test/" }
+
 require "minitest/autorun"
 require "webmock/minitest"
 require "caly"
@@ -18,9 +22,9 @@ class Minitest::Spec
     end
   end
 
-  def self.it_returns_an_error(provider, path, &block)
+  def self.it_returns_an_error(provider, &block)
     it "must return an Error instance" do
-      json = File.read("test/json/#{provider}/list_calendars_error.json")
+      json = File.read("test/json/#{provider}/error.json")
       stub_request(:any, /.*/).to_return_json(body: json, status: 401)
 
       response = instance_exec(&block)

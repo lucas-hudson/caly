@@ -7,4 +7,5 @@ group :development do
   gem "pry"
   gem "webmock"
   gem "standard"
+  gem "simplecov", require: false
 end

@@ -14,7 +14,7 @@ module Caly
         end
 
         describe "when unsuccessful" do
-          it_returns_an_error(:microsoft_graph, "calendars") do
+          it_returns_an_error(:microsoft_graph) do
             @microsoft_graph.list_calendars
           end
         end

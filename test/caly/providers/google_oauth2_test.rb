@@ -14,7 +14,7 @@ module Caly
         end
 
         describe "when unsuccessful" do
-          it_returns_an_error(:google_oauth2, "users/me/calendarList") do
+          it_returns_an_error(:google_oauth2) do
             @google_oauth2.list_calendars
           end
         end
