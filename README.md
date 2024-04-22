@@ -29,6 +29,7 @@ $ gem install caly
 account = Caly::Account.new(provider, token)
 
 account.list_calendars #=> Array of Caly::Calendar instances
+account.create_calendar(name: "Calendar") #=> Caly::Calendar instance
 ```
 
 ## Contributing
