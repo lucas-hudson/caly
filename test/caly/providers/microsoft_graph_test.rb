@@ -60,6 +60,25 @@ module Caly
           end
         end
       end
+
+      describe "#update_calendar" do
+        id = rand(123)
+
+        describe "when successful" do
+          it_gets_calendar(:microsoft_graph) do
+            json = json_response_for(:microsoft_graph, "get_calendar")
+            stub_request(:patch, [@url, "/calendars/#{id}"].join).to_return_json(body: json, status: 200)
+
+            @microsoft_graph.update_calendar(id: id, name: "test")
+          end
+        end
+
+        describe "when unsuccessful" do
+          it_returns_an_error(:microsoft_graph) do
+            @microsoft_graph.update_calendar(id: id, name: "test")
+          end
+        end
+      end
     end
   end
 end
