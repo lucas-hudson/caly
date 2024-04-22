@@ -32,6 +32,7 @@ account.list_calendars #=> Array of Caly::Calendar instances
 account.get_calendar(id) #=> Caly::Calendar instance
 account.create_calendar(name: "Calendar") #=> Caly::Calendar instance
 account.update_calendar(id: id, name: "New name") #=> Caly::Calendar instance
+account.delete_calendar(id) #=> true
 ```
 
 ## Contributing

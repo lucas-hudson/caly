@@ -20,6 +20,14 @@ class Minitest::Spec
     end
   end
 
+  def self.it_deletes_calendar(&block)
+    it "must return true" do
+      response = instance_exec(&block)
+
+      assert_equal true, response
+    end
+  end
+
   def self.it_returns_an_error(provider, &block)
     it "must return an Error instance" do
       json = json_for(provider, "error")

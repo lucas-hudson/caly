@@ -48,6 +48,12 @@ module Caly
         calendar_from(response)
       end
 
+      def delete_calendar(id)
+        response = execute_request(:delete, "calendars/#{id}")
+
+        response["code"] == "204" || error_from(response)
+      end
+
       private
 
       def calendar_from(response)

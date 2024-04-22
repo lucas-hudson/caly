@@ -77,6 +77,25 @@ module Caly
             end
           end
         end
+
+        describe "#delete_calendar" do
+          id = rand(123)
+
+          describe "when successful" do
+            it_deletes_calendar do
+              request = request_for(provider_name, :delete_calendar)
+              stub_request(:delete, [request[:path], id].join).to_return_json(status: request[:code])
+
+              provider.delete_calendar(id)
+            end
+          end
+
+          describe "when unsuccessful" do
+            it_returns_an_error(provider_name) do
+              provider.delete_calendar(id)
+            end
+          end
+        end
       end
     end
   end
