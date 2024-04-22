@@ -1,6 +1,10 @@
 module Caly
   class Account
+    extend Forwardable
+
     attr_reader :provider, :token
+
+    def_delegator :caly_provider, :list_calendars
 
     def initialize(provider, token)
       unless Caly::AVAILABLE_PROVIDERS.include?(provider.to_sym)
@@ -17,10 +21,6 @@ module Caly
 
     def caly_provider
       @caly_provider ||= self.class.caly_provider_for(provider).new(token)
-    end
-
-    def list_calendars
-      caly_provider.list_calendars
     end
   end
 end

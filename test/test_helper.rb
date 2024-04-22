@@ -38,3 +38,10 @@ class Minitest::Spec
     end
   end
 end
+
+class Minitest::Mock
+  # Suppress warnings that are shown when delegating methods to a Minitest::Mock
+  def respond_to_missing?(symbol, include_private = false)
+    @expected_calls.key? symbol.to_sym
+  end
+end
