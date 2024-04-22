@@ -1,5 +1,6 @@
 # Caly - One API, any Calendar
 [![Gem Version](https://badge.fury.io/rb/caly.svg)](https://badge.fury.io/rb/caly)
+[![Ruby Code Style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/standardrb/standard)
 [![Coverage](badge.svg)](https://github.com/Lucas-Hudson/caly)
 
 Caly unifies endpoints and object data models across many calendar APIs, helping you instantly integrate your app with 

@@ -1,0 +1,14 @@
+{
+  "kind": "calendar#calendar",
+  "etag": "\"1632490188832519000\"",
+  "id": "google_oauth2_id",
+  "summary": "google_oauth2_name",
+  "description": "Displays birthdays, anniversaries, and other event dates of people in Google Contacts.",
+  "timeZone": "Europe/Paris",
+  "location": "location",
+  "conferenceProperties": {
+    "allowedConferenceSolutionTypes": [
+      "hangoutsMeet"
+    ]
+  }
+}

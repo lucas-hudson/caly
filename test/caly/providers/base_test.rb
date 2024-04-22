@@ -1,3 +1,5 @@
+require "test_helper"
+
 module Caly
   module Providers
     describe Base do

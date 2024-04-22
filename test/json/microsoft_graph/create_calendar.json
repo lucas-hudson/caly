@@ -1,0 +1,22 @@
+{
+  "@odata.context":"https://graph.microsoft.com/v1.0/$metadata#me/calendars/$entity",
+  "@odata.id":"https://graph.microsoft.com/v1.0/users('266efe5a-0fd7-4edd-877b-b2d1e561f193@ae01a323-3934-4475-a32d-af1274312bb0')/calendars('AAMkADJmMVAAA=')",
+  "id":"microsoft_graph_id",
+  "name":"microsoft_graph_name",
+  "color":"auto",
+  "changeKey":"DxYSthXJXEWwAQSYQnXvIgAAIxGttg==",
+  "canShare":true,
+  "canViewPrivateItems":true,
+  "hexColor": "",
+  "canEdit":true,
+  "allowedOnlineMeetingProviders": [
+    "teamsForBusiness"
+  ],
+  "defaultOnlineMeetingProvider": "teamsForBusiness",
+  "isTallyingResponses": true,
+  "isRemovable": false,
+  "owner":{
+    "name":"Samantha Booth",
+    "address":"samanthab@contoso.com"
+  }
+}
