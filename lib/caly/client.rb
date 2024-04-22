@@ -22,7 +22,7 @@ module Caly
         http.request(request)
       end
 
-      return { "message" => "No Content", "code" => response.code } if response.is_a?(Net::HTTPNoContent)
+      return {"message" => "No Content", "code" => response.code} if response.is_a?(Net::HTTPNoContent)
 
       JSON.parse(response.body).merge("code" => response.code)
     end

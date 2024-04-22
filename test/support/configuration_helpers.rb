@@ -7,18 +7,18 @@ class Minitest::Spec
     config = {
       google_oauth2: {
         root: "https://www.googleapis.com/calendar/v3",
-        list_calendars: { path: "/users/me/calendarList", body: json_for(provider, :list_calendars), code: 200 },
-        get_calendar: { path: "/calendars/", body: json_for(provider, :get_calendar), code: 200 },
-        create_calendar: { path: "/calendars", body: json_for(provider, :get_calendar), code: 200 },
-        update_calendar: { path: "/calendars/", body: json_for(provider, :get_calendar), code: 200 },
+        list_calendars: {path: "/users/me/calendarList", body: json_for(provider, :list_calendars), code: 200},
+        get_calendar: {path: "/calendars/", body: json_for(provider, :get_calendar), code: 200},
+        create_calendar: {path: "/calendars", body: json_for(provider, :get_calendar), code: 200},
+        update_calendar: {path: "/calendars/", body: json_for(provider, :get_calendar), code: 200},
         delete_calendar: {path: "/calendars/", body: nil, code: 204}
       },
       microsoft_graph: {
         root: "https://graph.microsoft.com/v1.0/me",
-        list_calendars: { path: "/calendars", body: json_for(provider, :list_calendars), code: 200 },
-        get_calendar: { path: "/calendars/", body: json_for(provider, :get_calendar), code: 200 },
-        create_calendar: { path: "/calendars", body: json_for(provider, :get_calendar), code: 201 },
-        update_calendar: { path: "/calendars/", body: json_for(provider, :get_calendar), code: 200 },
+        list_calendars: {path: "/calendars", body: json_for(provider, :list_calendars), code: 200},
+        get_calendar: {path: "/calendars/", body: json_for(provider, :get_calendar), code: 200},
+        create_calendar: {path: "/calendars", body: json_for(provider, :get_calendar), code: 201},
+        update_calendar: {path: "/calendars/", body: json_for(provider, :get_calendar), code: 200},
         delete_calendar: {path: "/calendars/", body: nil, code: 204}
       }
     }

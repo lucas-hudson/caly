@@ -53,7 +53,7 @@ module Caly
           raw: response
         )
       end
-      
+
       def error_from(response)
         ::Caly::Error.new(
           type: response.dig("error", "code"),
