@@ -25,6 +25,21 @@ module Caly
         end.compact
       end
 
+      def get_calendar(id)
+        res = execute_request(:get, "calendars/#{id}")
+
+        return error_from(res) unless res["code"] == "200"
+
+        Caly::Calendar.new(
+          id: res["id"],
+          name: res["summary"],
+          description: res["description"],
+          location: res["location"],
+          timezone: res["timeZone"],
+          raw: res
+        )
+      end
+
       def create_calendar(name:, description: nil, location: nil, timezone: nil)
         res = execute_request(:post, "calendars", body: {
           summary: name,

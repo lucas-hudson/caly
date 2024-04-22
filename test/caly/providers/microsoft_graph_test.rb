@@ -25,10 +25,29 @@ module Caly
         end
       end
 
+      describe "#get_calendar" do
+        id = rand(123)
+
+        describe "when successful" do
+          it_gets_calendar(:microsoft_graph) do
+            json = json_response_for(:microsoft_graph, "get_calendar")
+            stub_request(:get, [@url, "/calendars/#{id}"].join).to_return_json(body: json, status: 200)
+
+            @microsoft_graph.get_calendar(id)
+          end
+        end
+
+        describe "when unsuccessful" do
+          it_returns_an_error(:microsoft_graph) do
+            @microsoft_graph.get_calendar(id)
+          end
+        end
+      end
+
       describe "#create_calendar" do
         describe "when successful" do
-          it_creates_calendar(:microsoft_graph) do
-            json = json_response_for(:microsoft_graph, "create_calendar")
+          it_gets_calendar(:microsoft_graph) do
+            json = json_response_for(:microsoft_graph, "get_calendar")
             stub_request(:post, [@url, "/calendars"].join).to_return_json(body: json, status: 201)
 
             @microsoft_graph.create_calendar(name: "test")

@@ -4,7 +4,7 @@ module Caly
 
     attr_reader :provider, :token
 
-    def_delegators :caly_provider, :list_calendars, :create_calendar
+    def_delegators :caly_provider, :list_calendars, :get_calendar, :create_calendar
 
     def initialize(provider, token)
       unless Caly::AVAILABLE_PROVIDERS.include?(provider.to_sym)

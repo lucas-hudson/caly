@@ -22,7 +22,7 @@ class Minitest::Spec
     end
   end
 
-  def self.it_creates_calendar(provider, &block)
+  def self.it_gets_calendar(provider, &block)
     it "must return a Calendar instance" do
       response = instance_exec(&block)
 
