@@ -8,6 +8,7 @@ module Caly
     def execute_request(method, path, body: nil)
       uri = URI.parse([@url, path].join("/"))
 
+      binding.pry
       request = Net::HTTPGenericRequest.new(
         method.to_s.upcase,
         body ? true : false,

@@ -41,6 +41,36 @@ account.get_event(id) #=> Caly::Event instance
 account.create_event(name: "Event") #=> Caly::Event instance
 account.update_event(id: id, name: "New name") #=> Caly::Event instance
 account.delete_event(id) #=> true
+
+# EXAMPLES V1
+
+# Select calendar
+calendar = Caly::Account.new(provider, token).list_calendars.first # => Lists calendars
+user.calendars.create(provider: user.provider, external_id: calendar.id) # => Save select calendar locally
+
+# View availabilities
+availability = user.calendar.availabilites.first # => Select availability 
+user.calendar.events.create(start_at: availability.start_at, end_at: availability.end_at) # => Create event
+
+# EXAMPLES V2
+
+# Calendar
+Caly::Calendar.list(provider, token)
+Caly::Calendar.fetch(provider, token, calendar_id)
+Caly::Calendar.create(provider, token, name, timezone, location, description)
+
+
+account = Caly::Account.new(provider, token)
+account.list_calendar
+account.fetch(calendar_id)
+
+
+calendar = Caly::Calendar.new(id).fetch # => Lists calendars
+user.calendars.create(provider: user.provider, external_id: calendar.id) # => Save select calendar locally
+
+# View availabilities
+availability = Caly::Availability.list(provider, token, calendar_id).first # => Select availability 
+user.calendar.events.create(start_at: availability.start_at, end_at: availability.end_at) # => Create event
 ```
 
 ## Usage V2
@@ -74,8 +104,8 @@ class User
 end
 
 class Calendar
-  def availabilites
-    user.list_availabilites(external_id)
+  def caly_availabilites
+    caly_account.list_availabilites(external_id)
   end
 end
 

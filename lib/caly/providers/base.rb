@@ -1,13 +1,16 @@
 module Caly
   module Providers
     class Base
-      extend Forwardable
+      class << self
+        attr_accessor :token
 
-      def_delegator :@client, :execute_request
+        def headers
+          {Authorization: "Bearer #{token}", "Content-Type": "application/json"}
+        end
 
-      def initialize(token)
-        @headers = {Authorization: "Bearer #{token}", "Content-type": "application/json"}
-        @client = Caly::Client.new(@url, @headers)
+        def execute_request(method, path, body: nil)
+          Caly::Client.new(self::URL, headers).execute_request(method, path, body: body)
+        end
       end
     end
   end
