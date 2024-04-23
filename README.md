@@ -62,6 +62,39 @@ event.get(id) #=> Caly::Response::Event instance
 event.create(calendar_id: id, name: "Event") #=> Caly::Response::Event instance
 event.update(id: id, name: "New name") #=> Caly::Response::Event instance
 event.delete(id) #=> true
+
+# Examples
+
+class User
+  caly with: :caly_account # delegates caly methods to :caly_account
+  
+  def caly_account
+    Caly::Account.new(provider, token)
+  end
+end
+
+class Calendar
+  def availabilites
+    user.list_availabilites(external_id)
+  end
+end
+
+class Event
+  before_create :create_event_on_provider
+  
+  def create_event_on_provider
+    event = user.create_event(start_at: start_at, end_at: end_at)
+    self.external_id = event.id
+  end
+end
+
+# Select calendar
+calendar = user.list_calendars.first # => Lists calendars
+user.calendars.create(provider: user.provider, external_id: calendar.id) # => Save select calendar locally
+
+# View availabilities
+availability = user.calendar.availabilites.first # => Select availability 
+user.calendar.events.create(start_at: availability.start_at, end_at: availability.end_at) # => Create event
 ```
 
 ## Contributing
