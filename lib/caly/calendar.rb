@@ -10,16 +10,5 @@ module Caly
       @timezone = timezone
       @raw = raw
     end
-
-    class << self
-      def caly_provider_for(provider)
-        Caly::Providers.const_get(Util.classify(provider)).const_get("Calendar")
-      end
-
-      def list(provider, token)
-        caly_provider_for(provider).token = token
-        caly_provider_for(provider).list
-      end
-    end
   end
 end
