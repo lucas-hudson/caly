@@ -24,15 +24,44 @@ Or install it yourself as:
 $ gem install caly
 ```
 
-## Usage
+## Usage V1
 ```ruby
 account = Caly::Account.new(provider, token)
 
+# Calendars
 account.list_calendars #=> Array of Caly::Calendar instances
 account.get_calendar(id) #=> Caly::Calendar instance
 account.create_calendar(name: "Calendar") #=> Caly::Calendar instance
 account.update_calendar(id: id, name: "New name") #=> Caly::Calendar instance
 account.delete_calendar(id) #=> true
+
+# Events
+account.list_events #=> Array of Caly::Event instances
+account.get_event(id) #=> Caly::Event instance
+account.create_event(name: "Event") #=> Caly::Event instance
+account.update_event(id: id, name: "New name") #=> Caly::Event instance
+account.delete_event(id) #=> true
+```
+
+## Usage V2
+```ruby
+account = Caly::Account.new(provider, token)
+
+# Calendars
+calendar = Caly::Calendar.new(account)
+calendar.list #=> Array of Caly::Response::Calendar instances
+calendar.get(id) #=> Caly::Response::Calendar instance
+calendar.create(name: "Calendar") #=> Caly::Response::Calendar instance
+calendar.update(id: id, name: "New name") #=> Caly::Response::Calendar instance
+calendar.delete(id) #=> true
+
+# Events
+event = Caly::Event.new(account)
+event.list(calendar_id) #=> Array of Caly::Response::Event instances
+event.get(id) #=> Caly::Response::Event instance
+event.create(calendar_id: id, name: "Event") #=> Caly::Response::Event instance
+event.update(id: id, name: "New name") #=> Caly::Response::Event instance
+event.delete(id) #=> true
 ```
 
 ## Contributing
