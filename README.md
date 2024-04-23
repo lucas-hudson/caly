@@ -26,105 +26,13 @@ $ gem install caly
 
 ## Usage V1
 ```ruby
-account = Caly::Account.new(provider, token)
+Caly::Calendar.list("provider", "token") # => Array of Caly::Calendar
+Caly::Calendar.get("provider", "token", "id") # => Caly::Calendar
+Caly::Calendar.create("provider", "token", name: "name") # => Caly::Calendar
 
-# Calendars
-account.list_calendars #=> Array of Caly::Calendar instances
-account.get_calendar(id) #=> Caly::Calendar instance
-account.create_calendar(name: "Calendar") #=> Caly::Calendar instance
-account.update_calendar(id: id, name: "New name") #=> Caly::Calendar instance
-account.delete_calendar(id) #=> true
-
-# Events
-account.list_events #=> Array of Caly::Event instances
-account.get_event(id) #=> Caly::Event instance
-account.create_event(name: "Event") #=> Caly::Event instance
-account.update_event(id: id, name: "New name") #=> Caly::Event instance
-account.delete_event(id) #=> true
-
-# EXAMPLES V1
-
-# Select calendar
-calendar = Caly::Account.new(provider, token).list_calendars.first # => Lists calendars
-user.calendars.create(provider: user.provider, external_id: calendar.id) # => Save select calendar locally
-
-# View availabilities
-availability = user.calendar.availabilites.first # => Select availability 
-user.calendar.events.create(start_at: availability.start_at, end_at: availability.end_at) # => Create event
-
-# EXAMPLES V2
-
-# Calendar
-Caly::Calendar.list(provider, token)
-Caly::Calendar.fetch(provider, token, calendar_id)
-Caly::Calendar.create(provider, token, name, timezone, location, description)
-
-
-account = Caly::Account.new(provider, token)
-account.list_calendar
-account.fetch(calendar_id)
-
-
-calendar = Caly::Calendar.new(id).fetch # => Lists calendars
-user.calendars.create(provider: user.provider, external_id: calendar.id) # => Save select calendar locally
-
-# View availabilities
-availability = Caly::Availability.list(provider, token, calendar_id).first # => Select availability 
-user.calendar.events.create(start_at: availability.start_at, end_at: availability.end_at) # => Create event
-```
-
-## Usage V2
-```ruby
-account = Caly::Account.new(provider, token)
-
-# Calendars
-calendar = Caly::Calendar.new(account)
-calendar.list #=> Array of Caly::Response::Calendar instances
-calendar.get(id) #=> Caly::Response::Calendar instance
-calendar.create(name: "Calendar") #=> Caly::Response::Calendar instance
-calendar.update(id: id, name: "New name") #=> Caly::Response::Calendar instance
-calendar.delete(id) #=> true
-
-# Events
-event = Caly::Event.new(account)
-event.list(calendar_id) #=> Array of Caly::Response::Event instances
-event.get(id) #=> Caly::Response::Event instance
-event.create(calendar_id: id, name: "Event") #=> Caly::Response::Event instance
-event.update(id: id, name: "New name") #=> Caly::Response::Event instance
-event.delete(id) #=> true
-
-# Examples
-
-class User
-  caly with: :caly_account # delegates caly methods to :caly_account
-  
-  def caly_account
-    Caly::Account.new(provider, token)
-  end
-end
-
-class Calendar
-  def caly_availabilites
-    caly_account.list_availabilites(external_id)
-  end
-end
-
-class Event
-  before_create :create_event_on_provider
-  
-  def create_event_on_provider
-    event = user.create_event(start_at: start_at, end_at: end_at)
-    self.external_id = event.id
-  end
-end
-
-# Select calendar
-calendar = user.list_calendars.first # => Lists calendars
-user.calendars.create(provider: user.provider, external_id: calendar.id) # => Save select calendar locally
-
-# View availabilities
-availability = user.calendar.availabilites.first # => Select availability 
-user.calendar.events.create(start_at: availability.start_at, end_at: availability.end_at) # => Create event
+Caly::Event.list("provider", "token", "calendar_id") # => Array of Caly::Event
+Caly::Event.get("provider", "token", "id") # => Caly::Event
+Caly::Event.create("provider", "token", starts_at: "starts_at", ends_at: "ends_at") # => Caly::Event
 ```
 
 ## Contributing
