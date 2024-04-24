@@ -14,6 +14,8 @@ require "caly/error"
 require "caly/util"
 require "caly/version"
 
+require "caly/account"
+
 Caly::AVAILABLE_PROVIDERS.each do |provider|
   require "caly/#{provider}/calendar"
 end
