@@ -3,6 +3,7 @@ module Caly
     class << self
       attr_accessor :token
 
+      OBJECTS = [:calendar, :event].freeze
       METHODS = [:list, :get, :create].freeze
 
       private
@@ -16,21 +17,24 @@ module Caly
       end
 
       def caly_provider_for(provider)
-        Caly.const_get(Util.classify(provider)).const_get("Calendar")
+        raise ArgumentError.new("Unknown provider") unless AVAILABLE_PROVIDERS.include?(provider.to_sym)
+        Caly.const_get("#{Util.classify(provider)}::#{name.split("::").last}")
       end
 
       def method_missing(symbol, *args)
-        super unless METHODS.include?(symbol)
+        super unless METHODS.include?(symbol) && OBJECTS.include?(name.gsub("Caly::", "").downcase.to_sym)
 
         provider, token, opts = *args
-        opts ||= {}
 
         caly_provider_for(provider).token = token
+        call_provider_method(provider, symbol, opts)
+      end
 
+      def call_provider_method(provider, symbol, opts)
         if opts.is_a?(String)
           caly_provider_for(provider).public_send(symbol, opts)
         else
-          caly_provider_for(provider).public_send(symbol, **opts)
+          caly_provider_for(provider).public_send(symbol, **(opts || {}))
         end
       end
     end

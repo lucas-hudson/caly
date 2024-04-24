@@ -6,20 +6,52 @@ module Caly
       class << self
         def list
           response = execute_request(:get, "users/me/calendarList")
-          p response
-          3.times.map { |c| superclass.new(id: c, name: "Google Calendar") }
+
+          return error_from(response) unless response["code"] == "200"
+
+          response["items"].map { |calendar| calendar_from(calendar) if calendar["accessRole"] == "owner" }.compact
         end
 
         def get(id)
-          response = execute_request(:get, "users/me/calendarList/#{id}")
-          p response
-          superclass.new(id: id, name: "Google Calendar")
+          response = execute_request(:get, "calendars/#{id}")
+
+          return error_from(response) unless response["code"] == "200"
+
+          calendar_from(response)
         end
 
-        def create(name:, description: nil)
-          response = execute_request(:get, "users/me/calendarList")
-          p response
-          superclass.new(name: name)
+        def create(name:, description: nil, location: nil, timezone: nil)
+          response = execute_request(:post, "calendars", body: {
+            summary: name,
+            description: description,
+            location: location,
+            timeZone: timezone
+          })
+
+          return error_from(response) unless response["code"] == "200"
+
+          calendar_from(response)
+        end
+
+        private
+
+        def calendar_from(response)
+          superclass.new(
+            id: response["id"],
+            name: response["summary"],
+            description: response["description"],
+            location: response["location"],
+            timezone: response["timeZone"],
+            raw: response
+          )
+        end
+
+        def error_from(response)
+          ::Caly::Error.new(
+            type: response.dig("error", "errors")&.first&.dig("message"),
+            message: response.dig("error", "message"),
+            code: response.dig("code")
+          )
         end
       end
     end
