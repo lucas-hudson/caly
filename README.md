@@ -24,15 +24,22 @@ Or install it yourself as:
 $ gem install caly
 ```
 
-## Usage V1
+## Usage
 ```ruby
-Caly::Calendar.list("provider", "token") # => Array of Caly::Calendar
-Caly::Calendar.get("provider", "token", "id") # => Caly::Calendar
-Caly::Calendar.create("provider", "token", name: "name") # => Caly::Calendar
+# Call the classes directly
+Caly::Calendar.list(provider, token) # => Array of Caly::Calendar
+Caly::Calendar.get(provider, token, id) # => Caly::Calendar
+Caly::Calendar.create(provider, token, name: name) # => Caly::Calendar
 
-Caly::Event.list("provider", "token", "calendar_id") # => Array of Caly::Event
-Caly::Event.get("provider", "token", "id") # => Caly::Event
-Caly::Event.create("provider", "token", starts_at: "starts_at", ends_at: "ends_at") # => Caly::Event
+Caly::Event.list(provider, token, calendar_id) # => Array of Caly::Event
+Caly::Event.get(provider, token, id) # => Caly::Event
+Caly::Event.create(provider, token, starts_at: starts_at, ends_at: ends_at) # => Caly::Event
+
+# Use the account wrapper
+account = Caly::Account.new(provider, token)
+account.list_calendars
+account.get_calendar(id)
+account.create_calendars(name: name)
 ```
 
 ## Contributing
