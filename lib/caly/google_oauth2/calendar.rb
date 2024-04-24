@@ -1,11 +1,12 @@
 module Caly
   module GoogleOauth2
     class Calendar < Caly::Calendar
-      URL = "https://www.googleapis.com/calendar/v3"
+
+      HOST = "https://www.googleapis.com/calendar/v3"
 
       class << self
         def list
-          response = execute_request(:get, "users/me/calendarList")
+          response = Caly::Client.execute_request(:get, "users/me/calendarList")
 
           return error_from(response) unless response["code"] == "200"
 
@@ -13,7 +14,7 @@ module Caly
         end
 
         def get(id)
-          response = execute_request(:get, "calendars/#{id}")
+          response = Caly::Client.execute_request(:get, "calendars/#{id}")
 
           return error_from(response) unless response["code"] == "200"
 
@@ -21,7 +22,7 @@ module Caly
         end
 
         def create(name:, description: nil, location: nil, timezone: nil)
-          response = execute_request(:post, "calendars", body: {
+          response = Caly::Client.execute_request(:post, "calendars", body: {
             summary: name,
             description: description,
             location: location,
@@ -47,7 +48,7 @@ module Caly
         end
 
         def error_from(response)
-          ::Caly::Error.new(
+          Caly::Error.new(
             type: response.dig("error", "errors")&.first&.dig("message"),
             message: response.dig("error", "message"),
             code: response.dig("code")

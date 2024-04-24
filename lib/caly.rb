@@ -1,3 +1,7 @@
+module Caly
+  AVAILABLE_PROVIDERS = [:google_oauth2, :microsoft_graph].freeze
+end
+
 require "net/http"
 require "json"
 require "forwardable"
@@ -10,9 +14,7 @@ require "caly/error"
 require "caly/util"
 require "caly/version"
 
-require "caly/google_oauth2/calendar"
-require "caly/microsoft_graph/calendar"
-
-module Caly
-  AVAILABLE_PROVIDERS = [:google_oauth2, :microsoft_graph].freeze
+Caly::AVAILABLE_PROVIDERS.each do |provider|
+  require "caly/#{provider}/calendar"
 end
+
