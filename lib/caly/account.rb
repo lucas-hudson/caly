@@ -8,6 +8,8 @@ module Caly
     private
 
     def method_missing(symbol, ...)
+      handles_method(symbol) || super
+
       method, klass = symbol.to_s.split("_")
       klass = Util.classify(klass.gsub(/s$/, ""))
 
@@ -15,7 +17,11 @@ module Caly
     end
 
     def respond_to_missing?(symbol, *)
-      ["_calendar"].any? { |name| symbol.to_s.include?(name) } || super
+      handles_method(symbol) || super
+    end
+
+    def handles_method(symbol)
+      ["_calendar"].any? { |name| symbol.to_s.include?(name) }
     end
   end
 end

@@ -76,5 +76,49 @@ module Caly
         end
       end
     end
+
+    describe "#update" do
+      describe "when successful" do
+        it "must return a Caly::Calendar instance" do
+          id = rand(123)
+
+          stub_request(
+            :patch, "https://www.googleapis.com/calendar/v3/calendars/#{id}"
+          ).to_return_json(body: json_for(:google_oauth2, :calendar, :get), status: 200)
+
+          response = @provider.update(id: id, name: "name")
+
+          assert response.is_a?(Caly::Calendar)
+          assert_equal "google_oauth2_id", response.id
+          assert_equal "google_oauth2_name", response.name
+        end
+      end
+
+      describe "when unsuccessful" do
+        it_returns_an_error(:google_oauth2) do
+          @provider.update(id: rand(123), name: "name")
+        end
+      end
+    end
+
+    describe "#delete" do
+      describe "when successful" do
+        it "must return a Caly::Calendar instance" do
+          id = rand(123)
+
+          stub_request(:delete, "https://www.googleapis.com/calendar/v3/calendars/#{id}").to_return_json(status: 204)
+
+          response = @provider.delete(id)
+
+          assert_equal true, response
+        end
+      end
+
+      describe "when unsuccessful" do
+        it_returns_an_error(:google_oauth2) do
+          @provider.delete(rand(123))
+        end
+      end
+    end
   end
 end

@@ -1,6 +1,6 @@
 module Caly
   class Calendar < Base
-    METHODS = [:list, :get, :create]
+    METHODS = [:list, :get, :create, :update, :delete]
 
     attr_reader :id, :name, :description, :location, :timezone, :raw
 

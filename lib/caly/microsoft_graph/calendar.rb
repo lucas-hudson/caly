@@ -28,6 +28,20 @@ module Caly
           calendar_from(response)
         end
 
+        def update(id:, name: nil, description: nil, location: nil, timezone: nil)
+          response = Caly::Client.execute_request(:patch, "calendars/#{id}", body: {name: name}.compact)
+
+          return error_from(response) unless response["code"] == "200"
+
+          calendar_from(response)
+        end
+
+        def delete(id)
+          response = Caly::Client.execute_request(:delete, "calendars/#{id}")
+
+          response["code"] == "204" || error_from(response)
+        end
+
         private
 
         def calendar_from(response)

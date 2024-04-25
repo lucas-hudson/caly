@@ -76,5 +76,49 @@ module Caly
         end
       end
     end
+
+    describe "#update" do
+      describe "when successful" do
+        it "must return a Caly::Calendar instance" do
+          id = rand(123)
+
+          stub_request(
+            :patch, "https://graph.microsoft.com/v1.0/me/calendars/#{id}"
+          ).to_return_json(body: json_for(:microsoft_graph, :calendar, :get), status: 200)
+
+          response = @provider.update(id: id, name: "name")
+
+          assert response.is_a?(Caly::Calendar)
+          assert_equal "microsoft_graph_id", response.id
+          assert_equal "microsoft_graph_name", response.name
+        end
+      end
+
+      describe "when unsuccessful" do
+        it_returns_an_error(:microsoft_graph) do
+          @provider.update(id: rand(123), name: "name")
+        end
+      end
+    end
+
+    describe "#delete" do
+      describe "when successful" do
+        it "must return a Caly::Calendar instance" do
+          id = rand(123)
+
+          stub_request(:delete, "https://graph.microsoft.com/v1.0/me/calendars/#{id}").to_return_json(status: 204)
+
+          response = @provider.delete(id)
+
+          assert_equal true, response
+        end
+      end
+
+      describe "when unsuccessful" do
+        it_returns_an_error(:microsoft_graph) do
+          @provider.delete(rand(123))
+        end
+      end
+    end
   end
 end

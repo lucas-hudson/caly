@@ -24,7 +24,7 @@ module Caly
       end
 
       def respond_to_missing?(symbol, *)
-        Object.const_defined?(:METHODS) && METHODS.include?(symbol) || super
+        const_defined?(:METHODS) && self::METHODS.include?(symbol) || super
       end
     end
   end
