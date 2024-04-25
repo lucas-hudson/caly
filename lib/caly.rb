@@ -4,7 +4,6 @@ end
 
 require "net/http"
 require "json"
-require "forwardable"
 require "pry"
 
 require "caly/base"

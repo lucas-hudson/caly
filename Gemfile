@@ -4,6 +4,7 @@ gemspec
 
 group :development do
   gem "minitest"
+  gem "minitest-stub-const"
   gem "pry"
   gem "webmock"
   gem "standard"
