@@ -12,7 +12,7 @@ module Caly
         [:list, :get, :create].each do |method|
           it "must call #{method}" do
             Caly.const_get("#{Util.classify(@provider)}::#{resource}").stub(method, "foo") do
-              assert_equal @account.send("#{method}_#{resource}"), "foo"
+              assert_equal @account.send(:"#{method}_#{resource}"), "foo"
             end
           end
         end

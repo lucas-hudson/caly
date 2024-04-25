@@ -10,9 +10,11 @@ module Caly
       def self.bar
         "bar"
       end
+
       def self.with_args(foobar)
         foobar
       end
+
       def self.with_kwargs(foo:)
         foo
       end

@@ -8,7 +8,7 @@ module Caly
         Caly.const_get("#{Util.classify(provider)}::#{name.split("::").last}")
       end
 
-      def method_missing(symbol, *args)
+      def method_missing(symbol, *args, &block)
         provider_name, token, opts = args
         opts ||= {}
 
@@ -21,6 +21,10 @@ module Caly
         Caly::Client.token = token
 
         opts.is_a?(Hash) ? provider.public_send(symbol, **opts) : provider.public_send(symbol, opts)
+      end
+
+      def respond_to_missing?(symbol, *)
+        Object.const_defined?(:METHODS) && METHODS.include?(symbol) || super
       end
     end
   end

@@ -4,11 +4,11 @@ module Caly
       attr_accessor :host, :token
 
       def headers
-        {Authorization: "Bearer #{self.token}", "Content-Type": "application/json"}
+        {Authorization: "Bearer #{token}", "Content-Type": "application/json"}
       end
 
       def execute_request(method, path, body: nil)
-        uri = URI.parse([self.host, path].join("/"))
+        uri = URI.parse([host, path].join("/"))
 
         request = Net::HTTPGenericRequest.new(
           method.to_s.upcase,

@@ -13,7 +13,7 @@ module Caly
         it "must return an array of Caly::Calendar instances" do
           stub_request(
             :get, "https://www.googleapis.com/calendar/v3/users/me/calendarList"
-          ).to_return_json(body: json_for(:google_oauth2, :calendar,:list), status: 200)
+          ).to_return_json(body: json_for(:google_oauth2, :calendar, :list), status: 200)
 
           response = @provider.list
 

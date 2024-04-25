@@ -18,4 +18,3 @@ require "caly/account"
 Caly::AVAILABLE_PROVIDERS.each do |provider|
   require "caly/#{provider}/calendar"
 end
-

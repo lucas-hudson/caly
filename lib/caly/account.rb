@@ -13,5 +13,9 @@ module Caly
 
       Caly.const_get(klass).public_send(method, @provider, @token, ...)
     end
+
+    def respond_to_missing?(symbol, *)
+      ["_calendar"].any? { |name| symbol.to_s.include?(name) } || super
+    end
   end
 end

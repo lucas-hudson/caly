@@ -13,7 +13,7 @@ module Caly
         it "must return an array of Caly::Calendar instances" do
           stub_request(
             :get, "https://graph.microsoft.com/v1.0/me/calendars"
-          ).to_return_json(body: json_for(:microsoft_graph, :calendar,:list), status: 200)
+          ).to_return_json(body: json_for(:microsoft_graph, :calendar, :list), status: 200)
 
           response = @provider.list
 
