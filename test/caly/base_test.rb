@@ -5,7 +5,7 @@ module Caly
 
   module A
     class Foo < Caly::Foo
-      HOST = "".freeze
+      HOST = "host".freeze
 
       def self.bar
         "bar"
@@ -71,6 +71,30 @@ module Caly
         end
       rescue NoMethodError => e
         assert_equal e.message, "undefined method `unknown_method' for Caly::Foo:Class"
+      end
+    end
+
+    describe "assignment to Client class" do
+      it "must assign the host" do
+        Caly.stub_const(:AVAILABLE_PROVIDERS, [:a]) do
+          A::Foo.stub(:bar, "foobar") do
+            Client.host = nil
+            @foo.bar(:a, "token")
+
+            assert_equal Client.host, A::Foo::HOST
+          end
+        end
+      end
+
+      it "must assign the token" do
+        Caly.stub_const(:AVAILABLE_PROVIDERS, [:a]) do
+          A::Foo.stub(:bar, "foobar") do
+            Client.token = nil
+            @foo.bar(:a, "token")
+
+            assert_equal Client.token, "token"
+          end
+        end
       end
     end
   end
