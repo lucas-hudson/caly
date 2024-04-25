@@ -1,7 +1,6 @@
 module Caly
   module GoogleOauth2
     class Calendar < Caly::Calendar
-
       HOST = "https://www.googleapis.com/calendar/v3"
 
       class << self
