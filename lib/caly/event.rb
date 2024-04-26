@@ -13,14 +13,8 @@ module Caly
                 :end_time_zone,
                 :attendees,
                 :creator,
-                :organizer,
                 :location,
-                :use_default_reminder,
-                :reminders,
-                :transparent,
-                :status,
                 :created,
-                :updated,
                 :raw
 
     def initialize(
@@ -33,16 +27,9 @@ module Caly
       start_time_zone: nil,
       ends_at: nil,
       end_time_zone: nil,
-      creator: nil,
-      organizer: nil,
       attendees: nil,
       location: nil,
-      use_default_reminder: true,
-      reminders: nil,
-      transparent: nil,
-      status: nil,
       created: nil,
-      updated: nil,
       raw: nil
     )
       @id = id
@@ -55,16 +42,9 @@ module Caly
       @ends_at = ends_at
       @end_time_zone = end_time_zone
       @attendees = attendees
-      @creator = creator
-      @organizer = organizer
       @location = location
-      @use_default_reminder = use_default_reminder
-      @reminders = reminders
-      @transparent = transparent
-      @status = status
       @raw = raw
       @created = created
-      @updated = updated
     end
   end
 end

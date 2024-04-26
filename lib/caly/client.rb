@@ -12,8 +12,6 @@ module Caly
         url = [host, path].join("/")
         uri = URI.parse(params ? "#{url}?#{encoded_params}" : url)
 
-        p params ? "#{url}?#{encoded_params}" : url
-
         request = Net::HTTPGenericRequest.new(
           method.to_s.upcase,
           body ? true : false,
@@ -27,8 +25,6 @@ module Caly
         response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
           http.request(request)
         end
-
-        p response
 
         return {"message" => "No Content", "code" => response.code} if response.is_a?(Net::HTTPNoContent)
 

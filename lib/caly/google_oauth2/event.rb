@@ -24,23 +24,24 @@ module Caly
 
         def create(
           starts_at:, start_time_zone:, ends_at:, end_time_zone:, calendar_id: "primary", name: nil, description: nil,
-          location: nil, transparent: false, status: :confirmed
+          location: nil
         )
-          response = Caly::Client.execute_request(:post, "calendars/#{calendar_id}/events", body: {
-            summary: name,
-            description: description,
-            location: location,
-            start: {
-              dateTime: starts_at.utc.strftime('%FT%TZ'),
-              timeZone: start_time_zone,
-            },
-            end: {
-              dateTime: ends_at.utc.strftime('%FT%TZ'),
-              timeZone: end_time_zone,
-            },
-            transparency: transparent ? "transparent" : "opaque",
-            status: status
-          })
+          response = Caly::Client.execute_request(
+            :post,
+            "calendars/#{calendar_id}/events",
+            body: Util.compact_blank({
+              summary: name,
+              description: description,
+              location: location,
+              start: {
+                dateTime: starts_at.utc.strftime('%FT%TZ'),
+                timeZone: start_time_zone,
+              },
+              end: {
+                dateTime: ends_at.utc.strftime('%FT%TZ'),
+                timeZone: end_time_zone,
+              }
+            }))
 
           return error_from(response) unless response["code"] == "200"
 
@@ -49,9 +50,12 @@ module Caly
 
         def update(
           calendar_id: "primary", id:, starts_at: nil, start_time_zone: nil, ends_at: nil, end_time_zone: nil,
-          name: nil, description: nil, location: nil, transparent: nil, status: nil
+          name: nil, description: nil, location: nil
         )
-          response = Caly::Client.execute_request(:patch, "calendars/#{calendar_id}/events/#{id}", body: {
+          response = Caly::Client.execute_request(
+            :patch,
+            "calendars/#{calendar_id}/events/#{id}",
+            body: Util.compact_blank({
               summary: name,
               description: description,
               location: location,
@@ -62,10 +66,8 @@ module Caly
               end: {
                 dateTime: ends_at&.utc&.strftime('%FT%TZ'),
                 timeZone: end_time_zone,
-              }.compact,
-              transparency: transparent,
-              status: status
-            }.compact)
+              }.compact
+            }))
 
           return error_from(response) unless response["code"] == "200"
 
@@ -91,15 +93,9 @@ module Caly
             start_time_zone: response.dig("start", "timeZone"),
             ends_at: response.dig("end", "date") || response.dig("end", "dateTime"),
             end_time_zone: response.dig("end", "timeZone"),
-            creator: response["creator"],
             attendees: response["attendees"] || [],
             location: response["location"],
-            use_default_reminder: response.dig("reminders", "useDefault"),
-            reminders: response.dig("reminders", "overrides") || [],
-            transparent: !response["transparency"].nil?,
-            status: response["status"],
             created: response["created"],
-            updated: response["updated"],
             raw: response
           )
         end
