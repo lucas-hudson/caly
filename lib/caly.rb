@@ -8,6 +8,7 @@ require "pry"
 
 require "caly/base"
 require "caly/calendar"
+require "caly/event"
 require "caly/client"
 require "caly/error"
 require "caly/util"
@@ -17,4 +18,5 @@ require "caly/account"
 
 Caly::AVAILABLE_PROVIDERS.each do |provider|
   require "caly/#{provider}/calendar"
+  require "caly/#{provider}/event"
 end

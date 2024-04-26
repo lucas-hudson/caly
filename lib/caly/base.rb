@@ -12,7 +12,7 @@ module Caly
         provider_name, token, opts = args
         opts ||= {}
 
-        raise ArgumentError.new("Unknown provider") unless AVAILABLE_PROVIDERS.include?(provider_name.to_sym)
+        raise ArgumentError.new("Unknown provider") unless provider_name.respond_to?(:to_sym) && AVAILABLE_PROVIDERS.include?(provider_name&.to_sym)
         raise ArgumentError.new("You must provide a token") unless token
 
         super unless (provider = caly_provider_for(provider_name)).respond_to?(symbol)

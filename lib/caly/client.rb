@@ -7,8 +7,12 @@ module Caly
         {Authorization: "Bearer #{token}", "Content-Type": "application/json"}
       end
 
-      def execute_request(method, path, body: nil)
-        uri = URI.parse([host, path].join("/"))
+      def execute_request(method, path, body: nil, params: {})
+        encoded_params = URI.encode_www_form(params)
+        url = [host, path].join("/")
+        uri = URI.parse(params ? "#{url}?#{encoded_params}" : url)
+
+        p params ? "#{url}?#{encoded_params}" : url
 
         request = Net::HTTPGenericRequest.new(
           method.to_s.upcase,
@@ -23,6 +27,8 @@ module Caly
         response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
           http.request(request)
         end
+
+        p response
 
         return {"message" => "No Content", "code" => response.code} if response.is_a?(Net::HTTPNoContent)
 
