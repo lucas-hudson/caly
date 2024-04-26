@@ -4,6 +4,7 @@ end
 
 require "net/http"
 require "json"
+require "time"
 require "pry"
 
 require "caly/base"

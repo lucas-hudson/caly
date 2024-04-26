@@ -91,13 +91,13 @@ module Caly
             name: response["summary"],
             description: response["description"],
             all_day: response.dig("start", "dateTime").nil?,
-            starts_at: response.dig("start", "date") || response.dig("start", "dateTime"),
+            starts_at: Time.parse(response.dig("start", "date") || response.dig("start", "dateTime")),
             start_time_zone: response.dig("start", "timeZone"),
-            ends_at: response.dig("end", "date") || response.dig("end", "dateTime"),
+            ends_at: Time.parse(response.dig("end", "date") || response.dig("end", "dateTime")),
             end_time_zone: response.dig("end", "timeZone"),
             attendees: response["attendees"] || [],
             location: response["location"],
-            created: response["created"],
+            created: Time.parse(response["created"]),
             raw: response
           )
         end

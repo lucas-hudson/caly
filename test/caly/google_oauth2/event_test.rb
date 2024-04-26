@@ -45,6 +45,8 @@ module Caly
           assert response.is_a?(Caly::Event)
           assert_equal "google_oauth2_id", response.id
           assert_equal "google_oauth2_name", response.name
+          assert_equal Time, response.starts_at.class
+          assert_equal Time, response.starts_at.class
         end
       end
 
