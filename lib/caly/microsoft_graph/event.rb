@@ -19,7 +19,7 @@ module Caly
         def get(id:, calendar_id: nil)
           response = Caly::Client.execute_request(
             :get,
-            "calendars/#{handle_calendar_id(calendar_id)}/events/#{id}"
+            "#{handle_calendar_id(calendar_id)}/events/#{id}"
           )
 
           return error_from(response) unless response["code"] == "200"
@@ -33,7 +33,7 @@ module Caly
         )
           response = Caly::Client.execute_request(
             :post,
-            "calendars/#{handle_calendar_id(calendar_id)}/events",
+            "#{handle_calendar_id(calendar_id)}/events",
             body: Util.compact_blank({
               subject: name,
               description: description,
@@ -60,7 +60,7 @@ module Caly
         )
           response = Caly::Client.execute_request(
             :patch,
-            "calendars/#{handle_calendar_id(calendar_id)}/events/#{id}",
+            "#{handle_calendar_id(calendar_id)}/events/#{id}",
             body: Util.compact_blank({
               subject: name,
               description: description,
@@ -84,7 +84,7 @@ module Caly
         def delete(id:, calendar_id: nil)
           response = Caly::Client.execute_request(
             :delete,
-            "calendars/#{handle_calendar_id(calendar_id)}/events/#{id}"
+            "#{handle_calendar_id(calendar_id)}/events/#{id}"
           )
 
           response["code"] == "204" || error_from(response)
@@ -99,13 +99,13 @@ module Caly
             name: response["subject"],
             description: response["bodyPreview"],
             all_day: response.dig("isAllDay"),
-            starts_at: response.dig("start", "dateTime"),
+            starts_at: Time.parse(response.dig("start", "dateTime")),
             start_time_zone: response.dig("start", "timeZone"),
-            ends_at: response.dig("end", "dateTime"),
+            ends_at: Time.parse(response.dig("end", "dateTime")),
             end_time_zone: response.dig("end", "timeZone"),
             attendees: response["attendees"],
             location: response.dig("location", "displayName"),
-            created: response["createdDateTime"],
+            created: Time.parse(response["createdDateTime"]),
             raw: response
           )
         end
