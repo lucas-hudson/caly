@@ -1,6 +1,6 @@
 module Caly
   module MicrosoftGraph
-    class Event < Caly::Event
+    class Event < Base
     end
   end
 end

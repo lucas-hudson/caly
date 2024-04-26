@@ -1,8 +1,6 @@
 module Caly
   module GoogleOauth2
-    class Calendar < Caly::Calendar
-      HOST = "https://www.googleapis.com/calendar/v3"
-
+    class Calendar < Base
       class << self
         def list
           response = Caly::Client.execute_request(:get, "users/me/calendarList")
@@ -55,21 +53,13 @@ module Caly
         private
 
         def calendar_from(response)
-          superclass.new(
+          Caly::Calendar.new(
             id: response["id"],
             name: response["summary"],
             description: response["description"],
             location: response["location"],
             timezone: response["timeZone"],
             raw: response
-          )
-        end
-
-        def error_from(response)
-          Caly::Error.new(
-            type: response.dig("error", "errors")&.first&.dig("message"),
-            message: response.dig("error", "message"),
-            code: response.dig("code")
           )
         end
       end

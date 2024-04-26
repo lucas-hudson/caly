@@ -1,8 +1,6 @@
 module Caly
   module MicrosoftGraph
-    class Calendar < Caly::Calendar
-      HOST = "https://graph.microsoft.com/v1.0/me"
-
+    class Calendar < Base
       class << self
         def list
           response = Caly::Client.execute_request(:get, "calendars")
@@ -49,14 +47,6 @@ module Caly
             id: response["id"],
             name: response["name"],
             raw: response
-          )
-        end
-
-        def error_from(response)
-          ::Caly::Error.new(
-            type: response.dig("error", "code"),
-            message: response.dig("error", "message"),
-            code: response.dig("code")
           )
         end
       end
