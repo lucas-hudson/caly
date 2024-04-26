@@ -40,7 +40,7 @@ module Caly
             :get, "https://www.googleapis.com/calendar/v3/calendars/#{id}"
           ).to_return_json(body: json_for(:google_oauth2, :calendar, :get), status: 200)
 
-          response = @provider.get(id)
+          response = @provider.get(id: id)
 
           assert response.is_a?(Caly::Calendar)
           assert_equal "google_oauth2_id", response.id
@@ -50,7 +50,7 @@ module Caly
 
       describe "when unsuccessful" do
         it_returns_an_error(:google_oauth2) do
-          @provider.get("id")
+          @provider.get(id: "id")
         end
       end
     end
@@ -108,7 +108,7 @@ module Caly
 
           stub_request(:delete, "https://www.googleapis.com/calendar/v3/calendars/#{id}").to_return_json(status: 204)
 
-          response = @provider.delete(id)
+          response = @provider.delete(id: id)
 
           assert_equal true, response
         end
@@ -116,7 +116,7 @@ module Caly
 
       describe "when unsuccessful" do
         it_returns_an_error(:google_oauth2) do
-          @provider.delete(rand(123))
+          @provider.delete(id: rand(123))
         end
       end
     end

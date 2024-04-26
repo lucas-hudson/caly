@@ -40,10 +40,10 @@ Caly::Event.update(provider, token, name: "new name")
 ### Calendar
 ```ruby
 Caly::Calendar.list(provider, token)
-Caly::Calendar.get(provider, token, id)
+Caly::Calendar.get(provider, token, id: id)
 Caly::Calendar.create(provider, token, name: name)
 Caly::Calendar.update(provider, token, id: id, name: name)
-Caly::Calendar.delete(provider, token, id)
+Caly::Calendar.delete(provider, token, id: id)
 ```
 
 ### Event

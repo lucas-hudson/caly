@@ -10,7 +10,7 @@ module Caly
           response["items"].map { |calendar| calendar_from(calendar) if calendar["accessRole"] == "owner" }.compact
         end
 
-        def get(id)
+        def get(id:)
           response = Caly::Client.execute_request(:get, "calendars/#{id}")
 
           return error_from(response) unless response["code"] == "200"
@@ -44,7 +44,7 @@ module Caly
           calendar_from(response)
         end
 
-        def delete(id)
+        def delete(id:)
           response = Caly::Client.execute_request(:delete, "calendars/#{id}")
 
           response["code"] == "204" || error_from(response)
