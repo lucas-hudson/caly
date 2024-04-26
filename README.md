@@ -25,22 +25,34 @@ $ gem install caly
 ```
 
 ## Usage
+
 ```ruby
 # Use the account wrapper
 account = Caly::Account.new(provider, token)
-
-account.list_calendars # => Array of Caly::Calendar instances
-account.get_calendar(id) # => Caly::Calendar instance
-account.create_calendar(name: name) # => Caly::Calendar instance
-account.update_calendar(id: id, name: name) # => Caly::Calendar instance
-account.delete_calendar(id) # => true
+account.list_calendars
+account.update_calendar(name: "new name")
 
 # Or call the classes directly
+Caly::Calendar.list(provider, token)
+Caly::Event.update(provider, token, name: "new name")
+```
+
+### Calendar
+```ruby
 Caly::Calendar.list(provider, token)
 Caly::Calendar.get(provider, token, id)
 Caly::Calendar.create(provider, token, name: name)
 Caly::Calendar.update(provider, token, id: id, name: name)
 Caly::Calendar.delete(provider, token, id)
+```
+
+### Event
+```ruby
+Caly::Event.list(provider, token)
+Caly::Event.get(provider, token, id: id)
+Caly::Event.create(provider, token, starts_at: starts, ends_at: ends, start_time_zone: timezone, end_time_zone: timezone)
+Caly::Event.update(provider, token, id: id, name: name)
+Caly::Event.delete(provider, token, id: id)
 ```
 
 ## Contributing
