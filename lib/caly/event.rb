@@ -21,7 +21,7 @@ module Caly
                 :status,
                 :created,
                 :updated,
-                :raw,
+                :raw
 
     def initialize(
       id: nil,

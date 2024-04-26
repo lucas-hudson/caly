@@ -2,7 +2,7 @@ module Caly
   module GoogleOauth2
     class Event < Base
       class << self
-        def list(calendar_id: nil, starts_at: nil, ends_at:)
+        def list(calendar_id: "primary", starts_at: nil, ends_at: nil)
           response = Caly::Client.execute_request(
             :get,
             "calendars/#{calendar_id}/events",
@@ -14,12 +14,12 @@ module Caly
           response["items"].map { |event| event_from(calendar_id, event) }
         end
 
-        def get(id)
-          response = Caly::Client.execute_request(:get, "calendars/#{id}")
+        def get(calendar_id: "primary", id:)
+          response = Caly::Client.execute_request(:get, "calendars/#{calendar_id}/events/#{id}")
 
           return error_from(response) unless response["code"] == "200"
 
-          calendar_from(response)
+          event_from(calendar_id, response)
         end
 
         def create(
@@ -31,11 +31,11 @@ module Caly
             description: description,
             location: location,
             start: {
-              dateTime: starts_at,
+              dateTime: starts_at.utc.strftime('%FT%TZ'),
               timeZone: start_time_zone,
             },
             end: {
-              dateTime: ends_at,
+              dateTime: ends_at.utc.strftime('%FT%TZ'),
               timeZone: end_time_zone,
             },
             transparency: transparent ? "transparent" : "opaque",
@@ -44,24 +44,36 @@ module Caly
 
           return error_from(response) unless response["code"] == "200"
 
-          calendar_from(response)
+          event_from(calendar_id, response)
         end
 
-        def update(id: nil, name: nil, description: nil, location: nil, timezone: nil)
-          response = Caly::Client.execute_request(:patch, "calendars/#{id}", body: {
-            summary: name,
-            description: description,
-            location: location,
-            timeZone: timezone
-          }.compact)
+        def update(
+          calendar_id: "primary", id:, starts_at: nil, start_time_zone: nil, ends_at: nil, end_time_zone: nil,
+          name: nil, description: nil, location: nil, transparent: nil, status: nil
+        )
+          response = Caly::Client.execute_request(:patch, "calendars/#{calendar_id}/events/#{id}", body: {
+              summary: name,
+              description: description,
+              location: location,
+              start: {
+                dateTime: starts_at&.utc&.strftime('%FT%TZ'),
+                timeZone: start_time_zone,
+              }.compact,
+              end: {
+                dateTime: ends_at&.utc&.strftime('%FT%TZ'),
+                timeZone: end_time_zone,
+              }.compact,
+              transparency: transparent,
+              status: status
+            }.compact)
 
           return error_from(response) unless response["code"] == "200"
 
-          calendar_from(response)
+          event_from(calendar_id, response)
         end
 
-        def delete(id)
-          response = Caly::Client.execute_request(:delete, "calendars/#{id}")
+        def delete(calendar_id: "primary", id:)
+          response = Caly::Client.execute_request(:delete, "calendars/#{calendar_id}/events/#{id}")
 
           response["code"] == "204" || error_from(response)
         end
