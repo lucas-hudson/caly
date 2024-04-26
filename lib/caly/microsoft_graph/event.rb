@@ -7,7 +7,7 @@ module Caly
             :get,
             "#{handle_calendar_id(calendar_id)}/calendarView",
             params: {
-              startDateTime: starts_at&.utc&.strftime('%FT%TZ'), endDateTime: ends_at&.utc&.strftime('%FT%TZ'), top: 1000
+              startDateTime: starts_at&.utc&.strftime("%FT%TZ"), endDateTime: ends_at&.utc&.strftime("%FT%TZ"), top: 1000
             }
           )
 
@@ -37,16 +37,17 @@ module Caly
             body: Util.compact_blank({
               subject: name,
               description: description,
-              location: { displayName: location }.compact,
+              location: {displayName: location}.compact,
               start: {
-                dateTime: starts_at.utc.strftime('%FT%TZ'),
-                timeZone: start_time_zone,
+                dateTime: starts_at.utc.strftime("%FT%TZ"),
+                timeZone: start_time_zone
               },
               end: {
-                dateTime: ends_at.utc.strftime('%FT%TZ'),
-                timeZone: end_time_zone,
+                dateTime: ends_at.utc.strftime("%FT%TZ"),
+                timeZone: end_time_zone
               }
-            }))
+            })
+          )
 
           return error_from(response) unless response["code"] == "201"
 
@@ -65,21 +66,22 @@ module Caly
               description: description,
               location: location,
               start: {
-                dateTime: starts_at&.utc&.strftime('%FT%TZ'),
-                timeZone: start_time_zone,
+                dateTime: starts_at&.utc&.strftime("%FT%TZ"),
+                timeZone: start_time_zone
               }.compact,
               end: {
-                dateTime: ends_at&.utc&.strftime('%FT%TZ'),
-                timeZone: end_time_zone,
+                dateTime: ends_at&.utc&.strftime("%FT%TZ"),
+                timeZone: end_time_zone
               }.compact
-            }))
+            })
+          )
 
           return error_from(response) unless response["code"] == "200"
 
           event_from(calendar_id, response)
         end
 
-        def delete(calendar_id: nil, id:)
+        def delete(id:, calendar_id: nil)
           response = Caly::Client.execute_request(
             :delete,
             "calendars/#{handle_calendar_id(calendar_id)}/events/#{id}"

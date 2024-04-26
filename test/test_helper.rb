@@ -3,11 +3,9 @@ require "shields_badge"
 
 SimpleCov.start { add_filter "/test/" }
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
- SimpleCov::Formatter::HTMLFormatter,
-                                                                 SimpleCov::Formatter::ShieldsBadge
+  SimpleCov::Formatter::HTMLFormatter,
+  SimpleCov::Formatter::ShieldsBadge
 ])
-
-
 
 require "minitest/autorun"
 require "webmock/minitest"

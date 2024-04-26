@@ -6,7 +6,7 @@ module Caly
           response = Caly::Client.execute_request(
             :get,
             "calendars/#{calendar_id}/events",
-            params: {timeMin: starts_at&.utc&.strftime('%FT%TZ'), timeMax: ends_at&.utc&.strftime('%FT%TZ')}.compact
+            params: {timeMin: starts_at&.utc&.strftime("%FT%TZ"), timeMax: ends_at&.utc&.strftime("%FT%TZ")}.compact
           )
 
           return error_from(response) unless response["code"] == "200"
@@ -14,7 +14,7 @@ module Caly
           response["items"].map { |event| event_from(calendar_id, event) }
         end
 
-        def get(calendar_id: "primary", id:)
+        def get(id:, calendar_id: "primary")
           response = Caly::Client.execute_request(:get, "calendars/#{calendar_id}/events/#{id}")
 
           return error_from(response) unless response["code"] == "200"
@@ -34,14 +34,15 @@ module Caly
               description: description,
               location: location,
               start: {
-                dateTime: starts_at.utc.strftime('%FT%TZ'),
-                timeZone: start_time_zone,
+                dateTime: starts_at.utc.strftime("%FT%TZ"),
+                timeZone: start_time_zone
               },
               end: {
-                dateTime: ends_at.utc.strftime('%FT%TZ'),
-                timeZone: end_time_zone,
+                dateTime: ends_at.utc.strftime("%FT%TZ"),
+                timeZone: end_time_zone
               }
-            }))
+            })
+          )
 
           return error_from(response) unless response["code"] == "200"
 
@@ -49,7 +50,7 @@ module Caly
         end
 
         def update(
-          calendar_id: "primary", id:, starts_at: nil, start_time_zone: nil, ends_at: nil, end_time_zone: nil,
+          id:, calendar_id: "primary", starts_at: nil, start_time_zone: nil, ends_at: nil, end_time_zone: nil,
           name: nil, description: nil, location: nil
         )
           response = Caly::Client.execute_request(
@@ -60,21 +61,22 @@ module Caly
               description: description,
               location: location,
               start: {
-                dateTime: starts_at&.utc&.strftime('%FT%TZ'),
-                timeZone: start_time_zone,
+                dateTime: starts_at&.utc&.strftime("%FT%TZ"),
+                timeZone: start_time_zone
               }.compact,
               end: {
-                dateTime: ends_at&.utc&.strftime('%FT%TZ'),
-                timeZone: end_time_zone,
+                dateTime: ends_at&.utc&.strftime("%FT%TZ"),
+                timeZone: end_time_zone
               }.compact
-            }))
+            })
+          )
 
           return error_from(response) unless response["code"] == "200"
 
           event_from(calendar_id, response)
         end
 
-        def delete(calendar_id: "primary", id:)
+        def delete(id:, calendar_id: "primary")
           response = Caly::Client.execute_request(:delete, "calendars/#{calendar_id}/events/#{id}")
 
           response["code"] == "204" || error_from(response)

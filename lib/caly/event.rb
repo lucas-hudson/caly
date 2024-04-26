@@ -3,19 +3,19 @@ module Caly
     METHODS = [:list, :get, :create, :update, :delete]
 
     attr_reader :id,
-                :calendar_id,
-                :name,
-                :description,
-                :all_day,
-                :starts_at,
-                :start_time_zone,
-                :ends_at,
-                :end_time_zone,
-                :attendees,
-                :creator,
-                :location,
-                :created,
-                :raw
+      :calendar_id,
+      :name,
+      :description,
+      :all_day,
+      :starts_at,
+      :start_time_zone,
+      :ends_at,
+      :end_time_zone,
+      :attendees,
+      :creator,
+      :location,
+      :created,
+      :raw
 
     def initialize(
       id: nil,
