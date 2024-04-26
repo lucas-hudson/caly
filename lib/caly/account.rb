@@ -16,12 +16,14 @@ module Caly
       Caly.const_get(klass).public_send(method, @provider, @token, ...)
     end
 
+    # :nocov:
     def respond_to_missing?(symbol, *)
       handles_method(symbol) || super
     end
+    # :nocov:
 
     def handles_method(symbol)
-      ["_calendar"].any? { |name| symbol.to_s.include?(name) }
+      %w[_calendar _event].any? { |name| symbol.to_s.include?(name) }
     end
   end
 end
