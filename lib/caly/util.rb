@@ -5,7 +5,9 @@ module Caly
     end
 
     def self.compact_blank(hash)
-      hash.reject {|_k, v| v.blank?}
+      hash.compact.reject do |_k, v|
+        v.nil? || (v.respond_to?(:blank?) && v.blank?) || (v.respond_to?(:empty?) && v.empty?)
+      end
     end
   end
 end

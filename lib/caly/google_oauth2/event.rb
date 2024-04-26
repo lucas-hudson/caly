@@ -6,7 +6,7 @@ module Caly
           response = Caly::Client.execute_request(
             :get,
             "calendars/#{calendar_id}/events",
-            params: {timeMin: starts_at.utc.strftime('%FT%TZ'), timeMax: ends_at.utc.strftime('%FT%TZ')}.compact
+            params: {timeMin: starts_at&.utc&.strftime('%FT%TZ'), timeMax: ends_at&.utc&.strftime('%FT%TZ')}.compact
           )
 
           return error_from(response) unless response["code"] == "200"

@@ -1,0 +1,87 @@
+{
+  "kind": "calendar#events",
+  "etag": "\"1632490188832519000\"",
+  "summary": "google_oauth2_name",
+  "description": "description",
+  "updated": "datetime",
+  "timeZone": "string",
+  "accessRole": "string",
+  "defaultReminders": [
+    {
+      "method": "string",
+      "minutes": "integer"
+    }
+  ],
+  "nextPageToken": "string",
+  "nextSyncToken": "string",
+  "items": [
+    {
+      "kind": "calendar#event",
+      "etag": "\"3348063097264000\"",
+      "id": "google_oauth2_id",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NzVrMGd1ZGpkM3I0Zm9iOGM1MmlndG1jazFfMjAyMjA3MTFUMDc0NTAwWiBsLmh1ZHNvbkB3ZS1saW5rLmNvbQ",
+      "created": "2022-07-11T07:43:11.000Z",
+      "updated": "2023-01-18T08:51:14.632Z",
+      "summary": "google_oauth2_name",
+      "creator": {"email": "user@caly.com", "self": true},
+      "organizer": {"email": "user@caly.com", "self": true},
+      "start": {"dateTime": "2022-07-11T09:45:00+02:00", "timeZone": "Europe/Paris"},
+      "end": {"dateTime": "2022-07-11T10:00:00+02:00", "timeZone": "Europe/Paris"},
+      "recurrence": ["RRULE:FREQ=WEEKLY;BYDAY=FR,MO,TH,TU,WE"],
+      "iCalUID": "75k0gudjd3r4fob8c52igtmck1@google.com",
+      "sequence": 0,
+      "attendees": [{"email": "a.nguyen@we-link.com", "responseStatus": "accepted"}, {"email": "l.hudson@we-link.com", "organizer": true, "self": true, "responseStatus": "accepted"}],
+      "hangoutLink": "https://meet.google.com/fjt-epzm-dam",
+      "conferenceData": {
+        "entryPoints": [
+          {"entryPointType": "video", "uri": "https://meet.google.com/fjt-epzm-dam", "label": "meet.google.com/fjt-epzm-dam"},
+          {"entryPointType": "more", "uri": "https://tel.meet/fjt-epzm-dam?pin=5336908838973", "pin": "5336908838973"},
+          {"regionCode": "FR", "entryPointType": "phone", "uri": "tel:+33-1-87-40-49-71", "label": "+33 1 87 40 49 71", "pin": "852642211"}
+        ],
+        "conferenceSolution": {
+          "key": {"type": "hangoutsMeet"},
+          "name": "Google Meet",
+          "iconUri": "https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v6/web-512dp/logo_meet_2020q4_color_2x_web_512dp.png"
+        },
+        "conferenceId": "fjt-epzm-dam"
+      },
+      "reminders": {"useDefault": true},
+      "eventType": "default"
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"3348063097264000\"",
+      "id": "google_oauth2_id",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NzVrMGd1ZGpkM3I0Zm9iOGM1MmlndG1jazFfMjAyMjA3MTFUMDc0NTAwWiBsLmh1ZHNvbkB3ZS1saW5rLmNvbQ",
+      "created": "2022-07-11T07:43:11.000Z",
+      "updated": "2023-01-18T08:51:14.632Z",
+      "summary": "google_oauth2_name",
+      "creator": {"email": "user@caly.com", "self": true},
+      "organizer": {"email": "user@caly.com", "self": true},
+      "start": {"dateTime": "2022-07-11T09:45:00+02:00", "timeZone": "Europe/Paris"},
+      "end": {"dateTime": "2022-07-11T10:00:00+02:00", "timeZone": "Europe/Paris"},
+      "recurrence": ["RRULE:FREQ=WEEKLY;BYDAY=FR,MO,TH,TU,WE"],
+      "iCalUID": "75k0gudjd3r4fob8c52igtmck1@google.com",
+      "sequence": 0,
+      "attendees": [{"email": "a.nguyen@we-link.com", "responseStatus": "accepted"}, {"email": "l.hudson@we-link.com", "organizer": true, "self": true, "responseStatus": "accepted"}],
+      "hangoutLink": "https://meet.google.com/fjt-epzm-dam",
+      "conferenceData": {
+        "entryPoints": [
+          {"entryPointType": "video", "uri": "https://meet.google.com/fjt-epzm-dam", "label": "meet.google.com/fjt-epzm-dam"},
+          {"entryPointType": "more", "uri": "https://tel.meet/fjt-epzm-dam?pin=5336908838973", "pin": "5336908838973"},
+          {"regionCode": "FR", "entryPointType": "phone", "uri": "tel:+33-1-87-40-49-71", "label": "+33 1 87 40 49 71", "pin": "852642211"}
+        ],
+        "conferenceSolution": {
+          "key": {"type": "hangoutsMeet"},
+          "name": "Google Meet",
+          "iconUri": "https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v6/web-512dp/logo_meet_2020q4_color_2x_web_512dp.png"
+        },
+        "conferenceId": "fjt-epzm-dam"
+      },
+      "reminders": {"useDefault": true},
+      "eventType": "default"
+    }
+  ]
+}
